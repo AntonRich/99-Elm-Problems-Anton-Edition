@@ -12,25 +12,27 @@ type NestedList a
     | Sublist (List (NestedList a))
 
 flatten : NestedList a -> List a
-flatten nestedList = []
-    -- let
-    --     getValue nestList =
-    --         case nestList of
-    --             Elem a ->
-    --                 a
-                
-    --             Sublist nestedValue ->
-    --                 List.map getValue nestedValue
-    -- in
-    -- List.map getValue [nestedList]
+flatten nestedList =
+    let
+        getValue nestValues acc =
+            case nestValues of
+                Elem a ->
+                    a :: acc
 
-getValue nestList =
-    case nestList of
-        Elem a ->
-            [a]
+                Sublist (x::_) ->
+                    x :: acc
                 
-        Sublist nestedValue ->
-            getValue (Sublist nestedValue)
+                Sublist (_::xs) ->
+                    case xs of
+                        Elem b ->
+                            b :: acc
+                        
+                        Sublist 
+
+
+    in
+        getValue nestedList []
+
 
 n10 =
     Sublist [Elem 1, Elem 2]
