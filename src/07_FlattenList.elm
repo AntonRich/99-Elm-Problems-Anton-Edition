@@ -20,7 +20,8 @@ flatten nestedList =
                 Sublist nestedValue ->
                     getValue nestedValue
     in
-    List.concatMap getValue nestedList
+    List.map getValue [nestedList]
+
 
 n10 =
     Sublist [Elem 1, Elem 2]
