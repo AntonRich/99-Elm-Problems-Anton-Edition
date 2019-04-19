@@ -13,25 +13,12 @@ type NestedList a
 
 flatten : NestedList a -> List a
 flatten nestedList =
-    let
-        getValue nestValues acc =
-            case nestValues of
-                Elem a ->
-                    a :: acc
-
-                Sublist (x::_) ->
-                    x :: acc
-                
-                Sublist (_::xs) ->
-                    case xs of
-                        Elem b ->
-                            b :: acc
-                        
-                        Sublist 
-
-
-    in
-        getValue nestedList []
+    case nestedList of
+        Elem x ->
+            [x]
+        
+        Sublist xs ->
+            List.concatMap flatten xs
 
 
 n10 =
@@ -52,8 +39,7 @@ nl1 =
         ]
 
 main =
-    -- text <| boolString <| flatten nl1 == List.range 1 9
-    text <| boolString <| getValue nl1 == List.range 1 9
+    text <| boolString <| flatten nl1 == List.range 1 9
 
 boolString : Bool -> String
 boolString x =
